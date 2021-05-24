@@ -11,8 +11,8 @@ public class DBConnectionORM {
 
     public DBConnectionORM() throws SQLException {
         //datos personalizados para cada BD, usuario, etc.
-        String user = "admin";
-        String password = "admin";
+        String user = "examen";
+        String password = "examen";
         String host = "80.34.34.150";
         String port = "33068";
         String database = "BaseDeExamen";

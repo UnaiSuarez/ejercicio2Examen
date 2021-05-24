@@ -9,8 +9,8 @@ public class DBConnection {
     private Connection connection = null;
 
     public DBConnection() throws SQLException{
-        String user = "admin";
-        String password = "admin";
+        String user = "examen";
+        String password = "examen";
         String host = "80.34.34.150";
         String port = "33068";
         String database = "BaseDeExamen";

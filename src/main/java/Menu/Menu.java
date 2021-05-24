@@ -37,6 +37,7 @@ public class Menu {
         System.out.println("1. Introducir");
         System.out.println("2. Mostar");
         System.out.println("3. Eliminar");
+        System.out.println("4. Atrás");
         System.out.print("Opción: ");
         int opcion = Integer.parseInt(scanner.nextLine());
         if (opcion==1){
@@ -46,6 +47,7 @@ public class Menu {
         }else if (opcion==3){
             eliminarpersona();
         }else {
+            System.out.println("\n\n");
             menuPrincipal();
         }
     }
@@ -76,8 +78,15 @@ public class Menu {
         for (int i = 0; i < personas.size(); i++) {
             System.out.println(i+" "+personas.get(i));
         }
+        System.out.print("Persona: ");
         int opcion = Integer.parseInt(scanner.nextLine());
-        DAOFactory.getInstance().daoPersona().remove(opcion);
+        if (opcion > personas.size()-1){
+            System.out.println("\nno es posible\n");
+            eliminarpersona();
+        }else {
+            DAOFactory.getInstance().daoPersona().remove(opcion);
+        }
+
         System.out.println("\n\n");
         menuPrincipal();
     }
@@ -88,6 +97,7 @@ public class Menu {
         System.out.println("1. Introducir");
         System.out.println("2. Mostar");
         System.out.println("3. Eliminar");
+        System.out.println("4. Atrás");
         System.out.print("Opción: ");
         int opcion = Integer.parseInt(scanner.nextLine());
         if (opcion==1){
@@ -108,14 +118,26 @@ public class Menu {
         for (int i = 0; i < personas.size(); i++) {
             System.out.println(i+" "+personas.get(i));
         }
+        System.out.print("Persona: ");
         int opcion = Integer.parseInt(scanner.nextLine());
+        if (opcion > personas.size()-1){
+            System.out.println("\nno es posible\n");
+            insertarTarea();
+        }
         System.out.print("Urgencia (alta|meida|baja): ");
-        Urgencia urgencia = Urgencia.valueOf(scanner.nextLine().toUpperCase());
+        String urgencia = scanner.nextLine().toUpperCase();
+        if (urgencia.equals("ALTA") || urgencia.equals("MEDIA") || urgencia.equals("BAJA")){
+            Urgencia urgencia1 = Urgencia.valueOf(urgencia);
+        }else {
+            System.out.println("\nno es posible\n");
+            insertarTarea();
+        }
+        Urgencia urgencia1 = Urgencia.valueOf(urgencia);
         System.out.print("Nombre de la tarea: ");
         String nombre = scanner.nextLine();
         System.out.print("Descripción: ");
         String descripcion = scanner.nextLine();
-        DAOFactory.getInstance().daoTarea().add(new Tarea(personas.get(opcion),urgencia,nombre,descripcion));
+        DAOFactory.getInstance().daoTarea().add(new Tarea(personas.get(opcion),urgencia1,nombre,descripcion));
         System.out.println("\n\n");
         menuPrincipal();
     }
